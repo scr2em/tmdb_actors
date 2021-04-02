@@ -9,7 +9,7 @@ class ActorService {
           ('https://api.themoviedb.org/3/person/popular?api_key=6b205e32bac82ee6cc6cc8474f60b415&page=1')),
     );
     final results = json.decode(response.body)["results"];
-    final actors =
+    final List<Actor> actors =
         results.map((Map<String, dynamic> e) => Actor.fromJson(e)).toList();
     return actors;
   }
