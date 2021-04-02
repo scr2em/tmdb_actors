@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iti_actors/ui/list_screen/ListScreen.dart';
 
 void main() {
   runApp(MyApp());
@@ -33,16 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Hello Actors',
-            ),
-          ],
-        ),
-      ),
+      body: ListScreen(),
     );
   }
 }
