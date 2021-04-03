@@ -81,18 +81,20 @@ class _ListScreenState extends State<ListScreen> {
                                       'Department: ${actor.department}',
                                       style: TextStyle(fontSize: 15),
                                     ),
-                                    SmoothStarRating(
-                                        allowHalfRating: true,
-                                        onRated: (v) {},
-                                        starCount: 10,
-                                        rating: actor.popularity,
-                                        size: 15,
-                                        isReadOnly: true,
-                                        filledIconData: Icons.star_rate,
-                                        halfFilledIconData: Icons.star_half,
-                                        color: Colors.orangeAccent,
-                                        borderColor: Colors.black,
-                                        spacing: 0.0),
+                                    actor.popularity != null
+                                        ? SmoothStarRating(
+                                            allowHalfRating: true,
+                                            onRated: (v) {},
+                                            starCount: 10,
+                                            rating: actor.popularity,
+                                            size: 15,
+                                            isReadOnly: true,
+                                            filledIconData: Icons.star_rate,
+                                            halfFilledIconData: Icons.star_half,
+                                            color: Colors.orangeAccent,
+                                            borderColor: Colors.black,
+                                            spacing: 0.0)
+                                        : Text('')
                                   ],
                                 ),
                                 flex: 2,

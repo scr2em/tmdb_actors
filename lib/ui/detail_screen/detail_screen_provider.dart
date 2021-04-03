@@ -6,12 +6,12 @@ class ActorProvider extends ChangeNotifier {
   ActorRepository _actorRepository = ActorRepository();
   ActorDetail actor;
 
-  ActorProvider(id) {
-    getActor(id);
+  ActorProvider(id, index) {
+    getActor(id, index);
   }
 
-  void getActor(id) {
-    _actorRepository.fetchActor(id).then((newActor) {
+  void getActor(id, index) {
+    _actorRepository.fetchActor(id, index).then((newActor) {
       actor = newActor;
       notifyListeners();
     });
