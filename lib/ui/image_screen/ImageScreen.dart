@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:image_downloader/image_downloader.dart';
 
@@ -15,11 +16,22 @@ class ImageScreen extends StatefulWidget {
 
 class _ImageScreenState extends State<ImageScreen> {
   void _downloadImage() async {
-    await ImageDownloader.downloadImage(
-      'https://image.tmdb.org/t/p/w500${widget.imgPath}',
-      destination: AndroidDestinationType.directoryDownloads
-        ..subDirectory("${widget.imgPath}.gif"),
-    );
+    try {
+      var imageId = await ImageDownloader.downloadImage(
+        'https://image.tmdb.org/t/p/w500${widget.imgPath}',
+        destination: AndroidDestinationType.directoryDownloads
+          ..subDirectory("${widget.imgPath}.gif"),
+      );
+      if (imageId == null) {
+        return;
+      }
+    } on PlatformException catch (error) {
+      if (error.code == "404") {
+        print("Not Found Error.");
+      } else if (error.code == "unsupported_file") {
+        print("UnSupported FIle Error.");
+      }
+    }
   }
 
   @override
@@ -39,7 +51,7 @@ class _ImageScreenState extends State<ImageScreen> {
       ),
       floatingActionButton: new FloatingActionButton(
           elevation: 5.0,
-          child: new Icon(Icons.check),
+          child: new Icon(Icons.file_download),
           backgroundColor: Colors.blue,
           onPressed: () {
             _downloadImage();
