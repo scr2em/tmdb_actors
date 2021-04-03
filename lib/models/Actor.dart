@@ -1,7 +1,3 @@
-import 'dart:convert';
-
-Actor welcomeFromJson(String str) => Actor.fromJson(json.decode(str));
-
 class Actor {
   final String name;
   final String profilePath;
