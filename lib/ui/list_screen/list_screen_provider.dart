@@ -4,15 +4,20 @@ import 'package:iti_actors/repositories/actor-repo.dart';
 
 class ActorsProvider extends ChangeNotifier {
   List<Actor> actors;
+  int counter;
+
   ActorRepository _actorRepository = ActorRepository();
 
-  ActorsProvider() {
-    getActors();
+  ActorsProvider({this.counter}) {
+    getActors(this.counter);
+    print('this counter ${this.counter}');
+    print('soso');
   }
 
-  void getActors() {
-    _actorRepository.fetchActors().then((newActors) {
+  void getActors(counter) {
+    _actorRepository.fetchActors(counter).then((newActors) {
       actors = newActors;
+      print('$actors');
       notifyListeners();
     });
   }
