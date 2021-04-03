@@ -13,7 +13,7 @@ class ActorsProvider extends ChangeNotifier {
   void getActors() {
     _actorRepository.fetchActors().then((newActors) {
       actors = newActors;
-      return actors;
+      notifyListeners();
     });
   }
 }
