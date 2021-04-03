@@ -5,7 +5,6 @@ class ActorRepository {
   ActorService _actorService = ActorService();
   Future<List<Actor>> fetchActors(counter) async {
     final actors = await _actorService.fetchActors(counter);
-    print('repo $counter');
     return actors;
   }
 }
