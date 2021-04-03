@@ -26,9 +26,16 @@ class _ListScreenState extends State<ListScreen> {
                     final actor = actorProvider.actors[index];
                     return GestureDetector(
                       onTap: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) =>
-                                DetailScreen(index: index, actor: actor)));
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => Scaffold(
+                              appBar: AppBar(
+                                title: Text(actor.name),
+                              ),
+                              body: DetailScreen(index: index, actor: actor),
+                            ),
+                          ),
+                        );
                       },
                       child: Container(
                         height: 150,

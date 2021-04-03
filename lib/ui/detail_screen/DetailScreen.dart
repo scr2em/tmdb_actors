@@ -15,26 +15,49 @@ class DetailScreen extends StatelessWidget {
       child: Consumer<ActorProvider>(
         builder: (buildCtx, actorProvider, _) {
           return actorProvider.actor != null
-              ? ListView(children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: CachedNetworkImage(
-                      fit: BoxFit.cover,
-                      imageUrl:
-                          'https://image.tmdb.org/t/p/w500${actor.profilePath}',
-                      errorWidget: (context, url, error) => Icon(Icons.error),
+              ? ListView(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl:
+                            'https://image.tmdb.org/t/p/w500${actor.profilePath}',
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
                     ),
-                  ),
-                  Text('${actorProvider.actor.name}'),
-                  CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl:
-                        'https://image.tmdb.org/t/p/w500${actorProvider.actor.modifiedImages[2].imgPath}',
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                ])
+                    Text('${actorProvider.actor.name}',
+                        style: TextStyle(fontSize: 20)),
+                    Text('Birthday: ${actorProvider.actor.birthDate}',
+                        style: TextStyle(fontSize: 20)),
+                    Text('Birth Place: ${actorProvider.actor.birthPlace}',
+                        style: TextStyle(fontSize: 20)),
+                    Text(
+                      'Biography: ${actorProvider.actor.biography}',
+                    ),
+                    GridView.count(
+                      physics:
+                          NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                      shrinkWrap: true,
+                      crossAxisCount: 2,
+                      padding: EdgeInsets.all(4.0),
+                      childAspectRatio: 8.0 / 9.0,
+                      children: actorProvider.actor.modifiedImages
+                          .map(
+                            (i) => CachedNetworkImage(
+                              fit: BoxFit.cover,
+                              imageUrl:
+                                  'https://image.tmdb.org/t/p/w500${i.imgPath}',
+                              errorWidget: (context, url, error) =>
+                                  Icon(Icons.error),
+                            ),
+                          )
+                          .toList(),
+                    )
+                  ],
+                )
               : CircularProgressIndicator();
         },
       ),
