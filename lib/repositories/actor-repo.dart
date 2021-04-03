@@ -31,11 +31,7 @@ class ActorRepository {
       final dbActorMap = dbActorsMap.firstWhere((element) {
         return element[DbHelper.COLUMN_ID] == id;
       });
-      // final dbActorMap = dbActorMapId[0];
-      // Map<String, dynamic> dbActorMap = dbActorsMap[index];
       ActorDetail dbActor = ActorDetail.fromDatabase(dbActorMap);
-      print('helo from $dbActor');
-      print('helodfsdfsdsdf from $dbActorMap');
       return dbActor;
     } else {
       final netActor = await _actorService.fetchActor(id);
