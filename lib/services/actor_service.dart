@@ -30,7 +30,6 @@ class ActorService {
           (json.decode(response.body)['images']['profiles'] as List)
               .map((e) => Image.fromJson((e)))).toList();
       result.modifiedImages = images;
-      print(json.decode(response.body));
       return result;
     } else {
       throw Exception('FAILED TO LOAD Actors');

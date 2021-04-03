@@ -1,11 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import 'dart:io' as io;
-import 'package:http/http.dart' as http;
-import 'package:image/image.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:image_downloader/image_downloader.dart';
 
 class ImageScreen extends StatefulWidget {
   final String imgPath;
@@ -18,7 +14,13 @@ class ImageScreen extends StatefulWidget {
 }
 
 class _ImageScreenState extends State<ImageScreen> {
-  void _downloadImage() async {}
+  void _downloadImage() async {
+    await ImageDownloader.downloadImage(
+      'https://image.tmdb.org/t/p/w500${widget.imgPath}',
+      destination: AndroidDestinationType.directoryDownloads
+        ..subDirectory("${widget.imgPath}.gif"),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
