@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iti_actors/ui/detail_screen/detail_screen_provider.dart';
+import 'package:iti_actors/ui/image_screen/ImageScreen.dart';
 import 'package:provider/provider.dart';
 
 class DetailScreen extends StatelessWidget {
@@ -46,12 +47,23 @@ class DetailScreen extends StatelessWidget {
                       childAspectRatio: 8.0 / 9.0,
                       children: actorProvider.actor.modifiedImages
                           .map(
-                            (i) => CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl:
-                                  'https://image.tmdb.org/t/p/w500${i.imgPath}',
-                              errorWidget: (context, url, error) =>
-                                  Icon(Icons.error),
+                            (i) => GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => ImageScreen(
+                                        name: actorProvider.actor.name,
+                                        imgPath: i.imgPath),
+                                  ),
+                                );
+                              },
+                              child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl:
+                                    'https://image.tmdb.org/t/p/w500${i.imgPath}',
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
                             ),
                           )
                           .toList(),
