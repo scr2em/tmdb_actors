@@ -11,8 +11,8 @@ class ActorService {
     );
     if (response.statusCode == 200) {
       var results = List<Actor>.from(
-          (json.decode(response.body)["results"] as List)
-              .map((e) => Actor.fromJson((e)))).toList();
+        (json.decode(response.body)["results"]).map((e) => Actor.fromJson((e))),
+      );
       return results;
     } else {
       throw Exception('FAILED TO LOAD Actors');
@@ -26,10 +26,6 @@ class ActorService {
     );
     if (response.statusCode == 200) {
       var result = ActorDetail.fromJson(json.decode(response.body));
-      var images = List<Image>.from(
-          (json.decode(response.body)['images']['profiles'] as List)
-              .map((e) => Image.fromJson((e)))).toList();
-      result.modifiedImages = images;
       return result;
     } else {
       throw Exception('FAILED TO LOAD Actors');

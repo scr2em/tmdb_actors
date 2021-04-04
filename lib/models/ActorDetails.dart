@@ -9,7 +9,7 @@ class ActorDetail {
   final String biography;
   final String birthDate;
   final String birthPlace;
-  List<Image> modifiedImages;
+  final Map images;
 
   ActorDetail(
       {this.name,
@@ -20,7 +20,7 @@ class ActorDetail {
       this.biography,
       this.birthDate,
       this.birthPlace,
-      this.modifiedImages});
+      this.images});
 
   factory ActorDetail.fromJson(Map<String, dynamic> json) {
     return ActorDetail(
@@ -31,7 +31,8 @@ class ActorDetail {
         id: json['id'],
         biography: json['biography'],
         birthDate: json['birthday'],
-        birthPlace: json['place_of_birth']);
+        birthPlace: json['place_of_birth'],
+        images: json['images']);
   }
 
   Map<String, dynamic> toMap() {
@@ -50,16 +51,4 @@ class ActorDetail {
       birthDate: json[DbHelper.COLUMN_BIRTHDAY],
       birthPlace: json[DbHelper.COLUMN_BIRTHPLACE],
       biography: json[DbHelper.COLUMN_BIOGRAPHY]);
-}
-
-class Image {
-  final String imgPath;
-  final double imgVote;
-
-  Image({this.imgPath, this.imgVote});
-
-  factory Image.fromJson(Map<String, dynamic> json) => Image(
-        imgPath: json['file_path'],
-        imgVote: json['vote_average'],
-      );
 }

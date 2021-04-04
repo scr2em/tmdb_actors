@@ -38,7 +38,7 @@ class DetailScreen extends StatelessWidget {
                     Text(
                       'Biography: ${actorProvider.actor.biography}',
                     ),
-                    actorProvider.actor.modifiedImages != null
+                    actorProvider.actor.images != null
                         ? GridView.count(
                             physics:
                                 NeverScrollableScrollPhysics(), // to disable GridView's scrolling
@@ -46,22 +46,22 @@ class DetailScreen extends StatelessWidget {
                             crossAxisCount: 2,
                             padding: EdgeInsets.all(4.0),
                             childAspectRatio: 8.0 / 9.0,
-                            children: actorProvider.actor.modifiedImages
-                                .map(
+                            children: actorProvider.actor.images['profiles']
+                                .map<Widget>(
                                   (i) => GestureDetector(
                                     onTap: () {
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
                                           builder: (context) => ImageScreen(
                                               name: actorProvider.actor.name,
-                                              imgPath: i.imgPath),
+                                              imgPath: i['file_path']),
                                         ),
                                       );
                                     },
                                     child: CachedNetworkImage(
                                       fit: BoxFit.cover,
                                       imageUrl:
-                                          'https://image.tmdb.org/t/p/w500${i.imgPath}',
+                                          'https://image.tmdb.org/t/p/w500${i['file_path']}',
                                       errorWidget: (context, url, error) =>
                                           Icon(Icons.error),
                                     ),

@@ -9,15 +9,17 @@ class ActorsProvider extends ChangeNotifier {
   int counter = 1;
 
   ActorsProvider() {
+    if (counter == 1) {
+      getActors();
+    }
     scrollController.addListener(() {
       if (scrollController.position.pixels ==
               scrollController.position.maxScrollExtent &&
           counter <= 500) {
         counter++;
         getActors();
-      } else if (counter > 500) {}
+      }
     });
-    getActors();
   }
 
   void getActors() {
