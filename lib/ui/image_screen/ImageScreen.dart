@@ -12,9 +12,9 @@ class ImageScreen extends StatelessWidget {
   void _downloadImage() async {
     try {
       var imageId = await ImageDownloader.downloadImage(
-        'https://image.tmdb.org/t/p/w500${imgPath}',
+        'https://image.tmdb.org/t/p/w500$imgPath',
         destination: AndroidDestinationType.directoryDownloads
-          ..subDirectory("${imgPath}.gif"),
+          ..subDirectory("$imgPath"),
       );
       if (imageId == null) {
         return;
@@ -40,7 +40,7 @@ class ImageScreen extends StatelessWidget {
             CachedNetworkImage(
               height: constraints.maxHeight,
               fit: BoxFit.cover,
-              imageUrl: 'https://image.tmdb.org/t/p/w500${imgPath}',
+              imageUrl: 'https://image.tmdb.org/t/p/w500$imgPath',
               errorWidget: (context, url, error) => Icon(Icons.error),
             ),
           ],

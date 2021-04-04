@@ -33,7 +33,7 @@ class DetailScreen extends StatelessWidget {
                               Icon(Icons.error),
                         ),
                       ),
-                      actorProvider.actor.imagesProfiles != null
+                      actorProvider.actor.birthDate != null
                           ? Container(
                               color: Colors.blueGrey[900],
                               child: Padding(
@@ -90,46 +90,49 @@ class DetailScreen extends StatelessWidget {
                                               fontSize: 16,
                                               color: Colors.white)),
                                     ),
-                                    GridView.count(
-                                      physics:
-                                          NeverScrollableScrollPhysics(), // to disable GridView's scrolling
-                                      shrinkWrap: true,
-                                      crossAxisCount: 2,
-                                      childAspectRatio: 8.0 / 9.0,
-                                      children: actorProvider
-                                          .actor.imagesProfiles
-                                          .map<Widget>(
-                                            (i) => Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ImageScreen(
-                                                              name:
-                                                                  actorProvider
-                                                                      .actor
-                                                                      .name,
-                                                              imgPath: i[
-                                                                  'file_path']),
+                                    actorProvider.actor.imagesProfiles != null
+                                        ? GridView.count(
+                                            physics:
+                                                NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                                            shrinkWrap: true,
+                                            crossAxisCount: 2,
+                                            childAspectRatio: 8.0 / 9.0,
+                                            children: actorProvider
+                                                .actor.imagesProfiles
+                                                .map<Widget>(
+                                                  (i) => Padding(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        Navigator.of(context)
+                                                            .push(
+                                                          MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                ImageScreen(
+                                                                    name: actorProvider
+                                                                        .actor
+                                                                        .name,
+                                                                    imgPath: i[
+                                                                        'file_path']),
+                                                          ),
+                                                        );
+                                                      },
+                                                      child: CachedNetworkImage(
+                                                        fit: BoxFit.cover,
+                                                        imageUrl:
+                                                            'https://image.tmdb.org/t/p/w500${i['file_path']}',
+                                                        errorWidget: (context,
+                                                                url, error) =>
+                                                            Icon(Icons.error),
+                                                      ),
                                                     ),
-                                                  );
-                                                },
-                                                child: CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl:
-                                                      'https://image.tmdb.org/t/p/w500${i['file_path']}',
-                                                  errorWidget:
-                                                      (context, url, error) =>
-                                                          Icon(Icons.error),
-                                                ),
-                                              ),
-                                            ),
+                                                  ),
+                                                )
+                                                .toList(),
                                           )
-                                          .toList(),
-                                    )
+                                        : Text('')
                                   ],
                                 ),
                               ),
@@ -137,7 +140,7 @@ class DetailScreen extends StatelessWidget {
                           : Text(''),
                     ],
                   )
-                : CircularProgressIndicator();
+                : Center(child: CircularProgressIndicator());
           });
         },
       ),
