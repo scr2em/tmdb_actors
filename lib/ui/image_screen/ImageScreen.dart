@@ -4,23 +4,17 @@ import 'package:flutter/services.dart';
 
 import 'package:image_downloader/image_downloader.dart';
 
-class ImageScreen extends StatefulWidget {
+class ImageScreen extends StatelessWidget {
   final String imgPath;
   final String name;
 
   ImageScreen({this.imgPath, this.name});
-
-  @override
-  _ImageScreenState createState() => _ImageScreenState();
-}
-
-class _ImageScreenState extends State<ImageScreen> {
   void _downloadImage() async {
     try {
       var imageId = await ImageDownloader.downloadImage(
-        'https://image.tmdb.org/t/p/w500${widget.imgPath}',
+        'https://image.tmdb.org/t/p/w500${imgPath}',
         destination: AndroidDestinationType.directoryDownloads
-          ..subDirectory("${widget.imgPath}.gif"),
+          ..subDirectory("${imgPath}.gif"),
       );
       if (imageId == null) {
         return;
@@ -38,17 +32,20 @@ class _ImageScreenState extends State<ImageScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.name),
+        title: Text(name),
       ),
-      body: ListView(
-        children: [
-          CachedNetworkImage(
-            fit: BoxFit.cover,
-            imageUrl: 'https://image.tmdb.org/t/p/w500${widget.imgPath}',
-            errorWidget: (context, url, error) => Icon(Icons.error),
-          ),
-        ],
-      ),
+      body: LayoutBuilder(builder: (buildCtx, constraints) {
+        return ListView(
+          children: [
+            CachedNetworkImage(
+              height: constraints.maxHeight,
+              fit: BoxFit.cover,
+              imageUrl: 'https://image.tmdb.org/t/p/w500${imgPath}',
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
+          ],
+        );
+      }),
       floatingActionButton: new FloatingActionButton(
           elevation: 5.0,
           child: new Icon(Icons.file_download),
