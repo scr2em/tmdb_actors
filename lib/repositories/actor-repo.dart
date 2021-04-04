@@ -6,6 +6,7 @@ import 'package:iti_actors/services/actor_service.dart';
 
 class ActorRepository {
   ActorService _actorService = ActorService();
+
   Future<List<Actor>> fetchActors(counter) async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     final dbHelper = DbHelper.instance;

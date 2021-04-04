@@ -9,7 +9,8 @@ class ActorDetail {
   final String biography;
   final String birthDate;
   final String birthPlace;
-  final Map images;
+  final List imagesProfiles;
+  List offlineImages;
 
   ActorDetail(
       {this.name,
@@ -20,7 +21,8 @@ class ActorDetail {
       this.biography,
       this.birthDate,
       this.birthPlace,
-      this.images});
+      this.imagesProfiles,
+      this.offlineImages});
 
   factory ActorDetail.fromJson(Map<String, dynamic> json) {
     return ActorDetail(
@@ -32,7 +34,7 @@ class ActorDetail {
         biography: json['biography'],
         birthDate: json['birthday'],
         birthPlace: json['place_of_birth'],
-        images: json['images']);
+        imagesProfiles: json['images']['profiles']);
   }
 
   Map<String, dynamic> toMap() {

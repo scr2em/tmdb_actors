@@ -29,46 +29,53 @@ class DetailScreen extends StatelessWidget {
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
-                    Text('${actorProvider.actor.name ?? ''}',
-                        style: TextStyle(fontSize: 20)),
-                    Text('Birthday: ${actorProvider.actor.birthDate ?? ''}',
-                        style: TextStyle(fontSize: 20)),
-                    Text('Birth Place: ${actorProvider.actor.birthPlace ?? ''}',
-                        style: TextStyle(fontSize: 20)),
-                    Text(
-                      'Biography: ${actorProvider.actor.biography ?? ''}',
-                    ),
-                    actorProvider.actor.images != null
-                        ? GridView.count(
-                            physics:
-                                NeverScrollableScrollPhysics(), // to disable GridView's scrolling
-                            shrinkWrap: true,
-                            crossAxisCount: 2,
-                            padding: EdgeInsets.all(4.0),
-                            childAspectRatio: 8.0 / 9.0,
-                            children: actorProvider.actor.images['profiles']
-                                .map<Widget>(
-                                  (i) => GestureDetector(
-                                    onTap: () {
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) => ImageScreen(
-                                              name: actorProvider.actor.name,
-                                              imgPath: i['file_path']),
+                    actorProvider.actor.imagesProfiles != null
+                        ? Column(
+                            children: [
+                              Text('${actorProvider.actor.name}',
+                                  style: TextStyle(fontSize: 20)),
+                              Text('Birthday: ${actorProvider.actor.birthDate}',
+                                  style: TextStyle(fontSize: 20)),
+                              Text(
+                                  'Birth Place: ${actorProvider.actor.birthPlace}',
+                                  style: TextStyle(fontSize: 20)),
+                              Text(
+                                'Biography: ${actorProvider.actor.biography}',
+                              ),
+                              GridView.count(
+                                physics:
+                                    NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                                shrinkWrap: true,
+                                crossAxisCount: 2,
+                                padding: EdgeInsets.all(4.0),
+                                childAspectRatio: 8.0 / 9.0,
+                                children: actorProvider.actor.imagesProfiles
+                                    .map<Widget>(
+                                      (i) => GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context).push(
+                                            MaterialPageRoute(
+                                              builder: (context) => ImageScreen(
+                                                  name:
+                                                      actorProvider.actor.name,
+                                                  imgPath: i['file_path']),
+                                            ),
+                                          );
+                                        },
+                                        child: CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl:
+                                              'https://image.tmdb.org/t/p/w500${i['file_path']}',
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
                                         ),
-                                      );
-                                    },
-                                    child: CachedNetworkImage(
-                                      fit: BoxFit.cover,
-                                      imageUrl:
-                                          'https://image.tmdb.org/t/p/w500${i['file_path']}',
-                                      errorWidget: (context, url, error) =>
-                                          Icon(Icons.error),
-                                    ),
-                                  ),
-                                )
-                                .toList())
-                        : Text(""),
+                                      ),
+                                    )
+                                    .toList(),
+                              )
+                            ],
+                          )
+                        : Text(''),
                   ],
                 )
               : CircularProgressIndicator();
