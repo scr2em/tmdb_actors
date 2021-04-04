@@ -29,14 +29,14 @@ class DetailScreen extends StatelessWidget {
                         errorWidget: (context, url, error) => Icon(Icons.error),
                       ),
                     ),
-                    Text('${actorProvider.actor.name}',
+                    Text('${actorProvider.actor.name ?? ''}',
                         style: TextStyle(fontSize: 20)),
-                    Text('Birthday: ${actorProvider.actor.birthDate}',
+                    Text('Birthday: ${actorProvider.actor.birthDate ?? ''}',
                         style: TextStyle(fontSize: 20)),
-                    Text('Birth Place: ${actorProvider.actor.birthPlace}',
+                    Text('Birth Place: ${actorProvider.actor.birthPlace ?? ''}',
                         style: TextStyle(fontSize: 20)),
                     Text(
-                      'Biography: ${actorProvider.actor.biography}',
+                      'Biography: ${actorProvider.actor.biography ?? ''}',
                     ),
                     actorProvider.actor.images != null
                         ? GridView.count(
@@ -68,7 +68,7 @@ class DetailScreen extends StatelessWidget {
                                   ),
                                 )
                                 .toList())
-                        : Text("No Images to Load"),
+                        : Text(""),
                   ],
                 )
               : CircularProgressIndicator();
