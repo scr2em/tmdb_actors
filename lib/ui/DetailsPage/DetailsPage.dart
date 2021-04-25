@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iti_actors/models/Actor.dart';
-import 'package:iti_actors/ui/detail_screen/detail_screen_provider.dart';
+import 'package:iti_actors/ui/DetailsPage/DetailsPageProvider.dart';
 import 'package:iti_actors/ui/image_screen/ImageScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
@@ -39,7 +39,6 @@ class DetailScreen extends StatelessWidget {
                       ),
                       actorProvider.actor.birthDate != null
                           ? Container(
-                              color: Colors.blueGrey[900],
                               child: Padding(
                                 padding: EdgeInsets.all(10.0),
                                 child: Column(
@@ -48,25 +47,20 @@ class DetailScreen extends StatelessWidget {
                                       padding:
                                           EdgeInsets.symmetric(vertical: 10),
                                       child: Text('${actorProvider.actor.name}',
-                                          style: TextStyle(
-                                              fontSize: 25,
-                                              color: Colors.white)),
+                                          style: TextStyle(fontSize: 25)),
                                     ),
                                     Padding(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 8.0),
                                       child: Text(
                                           'Birthday: ${actorProvider.actor.birthDate}',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: Colors.white)),
+                                          style: TextStyle(fontSize: 20)),
                                     ),
                                     Padding(
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
                                         'Birth Place: ${actorProvider.actor.birthPlace}',
-                                        style: TextStyle(
-                                            fontSize: 20, color: Colors.white),
+                                        style: TextStyle(fontSize: 20),
                                         textAlign: TextAlign.center,
                                       ),
                                     ),
@@ -90,9 +84,7 @@ class DetailScreen extends StatelessWidget {
                                       padding: EdgeInsets.all(8.0),
                                       child: Text(
                                           'Biography: ${actorProvider.actor.biography}',
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              color: Colors.white)),
+                                          style: TextStyle(fontSize: 16)),
                                     ),
                                     actorProvider.actor.imagesProfiles != null
                                         ? GridView.count(

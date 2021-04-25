@@ -4,26 +4,16 @@ import 'package:iti_actors/repositories/actor-repo.dart';
 
 class ActorsProvider extends ChangeNotifier {
   ActorRepository _actorRepository = ActorRepository();
-  ScrollController scrollController = ScrollController();
   List<Actor> actors = [];
   int counter = 1;
 
   ActorsProvider() {
-    if (counter == 1) {
-      getActors();
-    }
-    scrollController.addListener(() {
-      if (scrollController.position.pixels ==
-              scrollController.position.maxScrollExtent &&
-          counter <= 500) {
-        counter++;
-        getActors();
-      }
-    });
+    getActors();
   }
 
   void getActors() {
     _actorRepository.fetchActors(this.counter).then((newActors) {
+      counter++;
       actors.addAll(newActors);
       notifyListeners();
     });
