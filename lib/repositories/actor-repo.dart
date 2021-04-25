@@ -8,7 +8,7 @@ class ActorRepository {
   ActorService _actorService = ActorService();
 
   Future<List<Actor>> fetchActors(counter) async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
+    ConnectivityResult connectivityResult = await (Connectivity().checkConnectivity());
     final dbHelper = DbHelper.instance;
     if (connectivityResult == ConnectivityResult.none) {
       List<Map<String, dynamic>> dbActorsMap = await dbHelper.queryAllRows();
@@ -25,7 +25,7 @@ class ActorRepository {
   }
 
   Future<ActorDetail> fetchActor(id, index) async {
-    var connectivityResult = await (Connectivity().checkConnectivity());
+    ConnectivityResult connectivityResult = await (Connectivity().checkConnectivity());
     final dbHelper = DbHelper.instance;
     if (connectivityResult == ConnectivityResult.none) {
       List<Map<String, dynamic>> dbActorsMap = await dbHelper.queryAllRows();
@@ -35,7 +35,7 @@ class ActorRepository {
       ActorDetail dbActor = ActorDetail.fromDatabase(dbActorMap);
       return dbActor;
     } else {
-      final netActor = await _actorService.fetchActor(id);
+      final ActorDetail netActor = await _actorService.fetchActor(id);
       dbHelper.insert(netActor.toMap());
       return netActor;
     }

@@ -10,12 +10,11 @@ class ActorService {
           ('https://api.themoviedb.org/3/person/popular?api_key=6b205e32bac82ee6cc6cc8474f60b415&page=$counter')),
     );
     if (response.statusCode == 200) {
-      var results = List<Actor>.from(
-        (json.decode(response.body)["results"]).map((e) => Actor.fromJson((e))),
+      var results = List<Actor>.from((json.decode(response.body)["results"]).map((e) => Actor.fromJson((e))),
       );
       return results;
     } else {
-      throw Exception('FAILED TO LOAD Actors');
+      throw Exception('FAILED TO LOAD ACTORS');
     }
   }
 

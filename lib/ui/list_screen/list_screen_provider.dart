@@ -4,7 +4,7 @@ import 'package:iti_actors/repositories/actor-repo.dart';
 
 class ActorsProvider extends ChangeNotifier {
   ActorRepository _actorRepository = ActorRepository();
-  ScrollController scrollController = new ScrollController();
+  ScrollController scrollController =  ScrollController();
   List<Actor> actors = [];
   int counter = 1;
 

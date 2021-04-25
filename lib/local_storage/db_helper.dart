@@ -5,9 +5,9 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DbHelper {
-  static const _DATA_BASE_NAME = "posts.db";
+  static const _DATA_BASE_NAME = "actors.db";
   static const _DATA_BASE_VERSION = 1;
-  static const _TABLE = 'posts';
+  static const _TABLE = 'actors';
   static const COLUMN_ID = 'id';
   static const COLUMN_NAME = 'name';
   static const COLUMN_IMG = 'image';
