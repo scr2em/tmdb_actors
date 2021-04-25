@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:iti_actors/models/Actor.dart';
 import 'package:iti_actors/ui/detail_screen/DetailScreen.dart';
 import 'package:iti_actors/ui/list_screen/list_screen_provider.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,7 @@ class ListScreen extends StatelessWidget {
                   controller: actorProvider.scrollController,
                   itemCount: actorProvider.actors.length,
                   itemBuilder: (ctx, index) {
-                    final actor = actorProvider.actors[index];
+                    final Actor actor = actorProvider.actors[index];
                     return GestureDetector(
                       onTap: () {
                         Navigator.of(context).push(
@@ -61,7 +62,7 @@ class ListScreen extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: EdgeInsets.all(8.0),
                                       child: Text(
                                         '${actor.name}',
                                         style: TextStyle(

@@ -1,15 +1,17 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:iti_actors/models/Actor.dart';
 import 'package:iti_actors/ui/detail_screen/detail_screen_provider.dart';
 import 'package:iti_actors/ui/image_screen/ImageScreen.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_star_rating/smooth_star_rating.dart';
 
 class DetailScreen extends StatelessWidget {
-  final index;
-  final actor;
+  final int index;
+  final Actor actor;
 
   DetailScreen({this.index, this.actor});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ActorProvider>(
@@ -29,6 +31,8 @@ class DetailScreen extends StatelessWidget {
                           fit: BoxFit.cover,
                           imageUrl:
                               'https://image.tmdb.org/t/p/w500${actor.profilePath}',
+                          placeholder: (context, url) =>
+                              CircularProgressIndicator(),
                           errorWidget: (context, url, error) =>
                               Icon(Icons.error),
                         ),
@@ -37,20 +41,20 @@ class DetailScreen extends StatelessWidget {
                           ? Container(
                               color: Colors.blueGrey[900],
                               child: Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                padding: EdgeInsets.all(10.0),
                                 child: Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 10),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10),
                                       child: Text('${actorProvider.actor.name}',
                                           style: TextStyle(
                                               fontSize: 25,
                                               color: Colors.white)),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 8.0),
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 8.0),
                                       child: Text(
                                           'Birthday: ${actorProvider.actor.birthDate}',
                                           style: TextStyle(
@@ -58,7 +62,7 @@ class DetailScreen extends StatelessWidget {
                                               color: Colors.white)),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: EdgeInsets.all(8.0),
                                       child: Text(
                                         'Birth Place: ${actorProvider.actor.birthPlace}',
                                         style: TextStyle(
@@ -67,8 +71,8 @@ class DetailScreen extends StatelessWidget {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5.0),
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 5.0),
                                       child: SmoothStarRating(
                                           allowHalfRating: true,
                                           onRated: (v) {},
@@ -83,7 +87,7 @@ class DetailScreen extends StatelessWidget {
                                           spacing: 0.0),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: EdgeInsets.all(8.0),
                                       child: Text(
                                           'Biography: ${actorProvider.actor.biography}',
                                           style: TextStyle(
@@ -93,7 +97,7 @@ class DetailScreen extends StatelessWidget {
                                     actorProvider.actor.imagesProfiles != null
                                         ? GridView.count(
                                             physics:
-                                                NeverScrollableScrollPhysics(), // to disable GridView's scrolling
+                                                NeverScrollableScrollPhysics(),
                                             shrinkWrap: true,
                                             crossAxisCount: 2,
                                             childAspectRatio: 8.0 / 9.0,
@@ -102,8 +106,7 @@ class DetailScreen extends StatelessWidget {
                                                 .map<Widget>(
                                                   (i) => Padding(
                                                     padding:
-                                                        const EdgeInsets.all(
-                                                            10.0),
+                                                        EdgeInsets.all(10.0),
                                                     child: GestureDetector(
                                                       onTap: () {
                                                         Navigator.of(context)
@@ -123,6 +126,9 @@ class DetailScreen extends StatelessWidget {
                                                         fit: BoxFit.cover,
                                                         imageUrl:
                                                             'https://image.tmdb.org/t/p/w500${i['file_path']}',
+                                                        placeholder: (context,
+                                                                url) =>
+                                                            CircularProgressIndicator(),
                                                         errorWidget: (context,
                                                                 url, error) =>
                                                             Icon(Icons.error),
